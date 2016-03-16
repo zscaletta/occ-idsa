@@ -42,7 +42,7 @@ class DailySeries:
         if new_fname:
             for filename in os.listdir(dest_dir):
                 if filename == "intra_day_series_adds.csv":
-                    os.rename(filename, new_fname)
+                    os.rename(os.path.join(dest_dir,filename), os.path.join(dest_dir,new_fname))
                     logging.info('... destination file renamed: {0}'.format(new_fname))
 
     def parse_args(self):
