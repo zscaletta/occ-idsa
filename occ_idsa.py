@@ -48,7 +48,7 @@ class DailySeries:
     def parse_args(self):
 
         dir_path = os.getcwd()
-        dest_fname = 'occ_idsa.csv'
+        dest_fname = 'seriesadded.csv'
         
         if len(sys.argv) > 1:
             for item in sys.argv:
