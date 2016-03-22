@@ -20,7 +20,7 @@ class DailySeries:
 
         self.download_new_data(destination, fname)
     
-    def download_new_data(self, dest_dir, new_fname):
+    def download_new_data(self, dest_dir, new_fname, overwrite=True):
 
         download_page_url = "http://www.optionsclearing.com/webapps/series-added-today?pageNum=1&pageSize=1000"
 
@@ -38,7 +38,11 @@ class DailySeries:
         button.click()
         time.sleep(2)
         driver.close()
-        
+
+        if overwrite:
+            if os.path.exists(os.path.join(dest_dir, new_fname)):
+                os.remove(os.path.join(dest_dir, new_fname))
+
         if new_fname:
             for filename in os.listdir(dest_dir):
                 if filename == "intra_day_series_adds.csv":
