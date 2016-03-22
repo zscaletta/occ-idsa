@@ -36,17 +36,18 @@ class DailySeries:
 
         button = driver.find_element_by_xpath('//*[@title="Download as CSV"]')
         button.click()
-        time.sleep(2)
+        time.sleep(5)
         driver.close()
 
         if overwrite:
-            if os.path.exists(os.path.join(dest_dir, new_fname)):
-                os.remove(os.path.join(dest_dir, new_fname))
+            for filename in os.listdir(dest_dir):
+                if filename == new_fname:
+                    os.remove(os.path.join(dest_dir,filename))
 
         if new_fname:
             for filename in os.listdir(dest_dir):
                 if filename == "intra_day_series_adds.csv":
-                    os.rename(filename, new_fname)
+                    os.rename(os.path.join(dest_dir,filename), os.path.join(dest_dir,new_fname))
                     logging.info('... destination file renamed: {0}'.format(new_fname))
 
     def parse_args(self):
